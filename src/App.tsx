@@ -3,6 +3,7 @@ import { SudokuGrid } from './components/SudokuGrid';
 import { NumberPad } from './components/NumberPad';
 import { GameControls } from './components/GameControls';
 import { ResultCard } from './components/ResultCard';
+import { GameOverModal } from './components/GameOverModal';
 import { Leaf, Sun, Moon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import clsx from 'clsx';
@@ -127,6 +128,14 @@ function App() {
         isOpen={stage === 'won'}
         onClose={() => newGame(difficulty)}
         difficulty={difficulty}
+        theme={theme}
+      />
+
+      {/* Game Over Modal */}
+      <GameOverModal
+        isOpen={stage === 'lost'}
+        onReset={() => newGame(difficulty)}
+        theme={theme}
       />
 
     </div>

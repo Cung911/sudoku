@@ -6,7 +6,7 @@ export type Difficulty = 'Easy' | 'Medium' | 'Hard';
 
 
 export const useSudoku = () => {
-    const [stage, setStage] = useState<'playing' | 'won'>('playing');
+    const [stage, setStage] = useState<'playing' | 'won' | 'lost'>('playing');
     const [board, setBoard] = useState<Grid>([]);
     const [initialBoard, setInitialBoard] = useState<Grid>([]);
     const [solvedBoard, setSolvedBoard] = useState<Grid>([]);
@@ -54,7 +54,11 @@ export const useSudoku = () => {
         // OR we just use isValidMove for "Game Rules" validity.
         // Making it "Beginner Friendly" usually means instant feedback if it's WRONG according to the Solution.
         if (newBoard[row][col] !== solvedBoard[row][col]) {
-            setMistakes(prev => prev + 1);
+            const nextMistakes = mistakes + 1;
+            setMistakes(nextMistakes);
+            if (nextMistakes >= 3) {
+                setStage('lost');
+            }
         }
 
         // Check consistency/completion
