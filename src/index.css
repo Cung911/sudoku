@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --color-pastel-green: #B5EAD7;
+  --color-pastel-orange: #FFDAC1;
+  --color-pastel-grey: #E2F0CB;
+  --color-pastel-neutral: #e5e7eb;
+  --color-pastel-text: #4B5563;
+  --color-pastel-bg: #F9FAFB;
+  --font-sans: Inter, system-ui, sans-serif;
+
+  --color-glass-bg: #0f172a;
+  --color-glass-card: #1e293b80;
+  --color-glass-border: #ffffff1a;
+  --color-glass-border-bright: #ffffff33;
+  --color-glass-glow: #38bdf8;
+  --color-glass-text: #f1f5f9;
+  --color-glass-accent: #0ea5e9;
+  --color-glass-mistake: #ef4444;
+}
+
+body {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+  background-color: var(--color-pastel-bg);
+  color: var(--color-pastel-text);
+  font-family: var(--font-sans);
+}
+
+.glass-morphism {
+  backdrop-filter: blur(24px);
+  background-color: var(--color-glass-card);
+  border: 1px solid var(--color-glass-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-glow {
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
