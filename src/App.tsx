@@ -4,7 +4,7 @@ import { NumberPad } from './components/NumberPad';
 import { GameControls } from './components/GameControls';
 import { ResultCard } from './components/ResultCard';
 import { Leaf, Sun, Moon } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 
 function App() {
@@ -23,8 +23,25 @@ function App() {
     onErase,
     setDifficulty
   } = useSudoku();
-
   const isGlass = theme === 'glass';
+
+  // Keyboard Input Listener
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (stage !== 'playing') return;
+
+      if (e.key >= '1' && e.key <= '9') {
+        onNumberInput(parseInt(e.key));
+      } else if (e.key === 'Backspace' || e.key === 'Delete') {
+        onErase();
+      } else if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+        onUndo();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [stage, onNumberInput, onErase, onUndo]);
 
   return (
     <div className={clsx(
@@ -73,7 +90,7 @@ function App() {
       </header>
 
       {/* Main Game Area */}
-      <div className="w-full max-w-2xl flex flex-col items-center">
+      <div className="w-full max-w-xl flex flex-col items-center">
         <GameControls
           difficulty={difficulty}
           setDifficulty={setDifficulty}
@@ -92,7 +109,6 @@ function App() {
         />
 
         <NumberPad
-          onNumberInput={onNumberInput}
           onErase={onErase}
           onUndo={onUndo}
           theme={theme}
