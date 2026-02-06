@@ -12,6 +12,7 @@ function App() {
   const {
     board,
     initialBoard,
+    solvedBoard,
     selectedCell,
     mistakes,
     stage,
@@ -76,10 +77,10 @@ function App() {
           "text-5xl font-black tracking-tighter mb-4 transition-colors",
           isGlass ? "text-white" : "text-gray-800"
         )}>
-          Daily <span className={clsx(
+          Sudo<span className={clsx(
             "text-transparent bg-clip-text bg-gradient-to-r",
             isGlass ? "from-cyan-400 via-blue-500 to-purple-600" : "from-green-400 to-orange-300"
-          )}>Sudoku</span>
+          )}>kalm</span> <span className="text-sm font-medium tracking-[0.2em] uppercase opacity-50 block mt-1">Puzzle</span>
         </h1>
         <p className={clsx(
           "max-w-md mx-auto text-lg",
@@ -102,6 +103,7 @@ function App() {
         <SudokuGrid
           board={board}
           initialBoard={initialBoard}
+          solvedBoard={solvedBoard}
           selectedCell={selectedCell}
           onCellSelect={onCellSelect}
           mistakes={mistakes}
@@ -117,7 +119,7 @@ function App() {
 
       {/* Footer */}
       <footer className="mt-12 text-center text-gray-400 text-sm">
-        <p>© 2026 Sudoku Zen. Designed for focus.</p>
+        <p>© 2026 Sudokalm. Designed for focus.</p>
       </footer>
 
       {/* Result Modal */}

@@ -98,6 +98,7 @@ export const useSudoku = () => {
     return {
         board,
         initialBoard,
+        solvedBoard,
         selectedCell,
         mistakes,
         stage,
